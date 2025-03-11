@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf288abf00754eaeb8c5eb534537d856" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="DVDModel.Arenda" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Check" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Client" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Film" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Film_Zhanr" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Role" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Sotrudnik" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Vozrast" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DVDModel.Zhanr" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="DVDModel.FK_Arenda_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Arenda_Sotrudnik" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Check_Arenda" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Check_Film" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Film_Vozrast" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Film_Zhanr_Film" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Film_Zhanr_Zhanr" ManuallyRouted="false" />
+        <AssociationConnector Association="DVDModel.FK_Sotrudnik_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

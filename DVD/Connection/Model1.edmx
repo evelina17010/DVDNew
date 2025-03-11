@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DVDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arenda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="D_vidachi" Type="date" />
+          <Property Name="id_client" Type="int" />
+          <Property Name="id_sotrudnika" Type="int" />
+          <Property Name="D_sdachi" Type="date" />
+        </EntityType>
+        <EntityType Name="Check">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_arenda" Type="int" />
+          <Property Name="id_film" Type="int" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="id_vozr_ogranich" Type="int" />
+          <Property Name="cost_arend" Type="float" />
+        </EntityType>
+        <EntityType Name="Film_Zhanr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Film" Type="int" />
+          <Property Name="Id_Zhanr" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sotrudnik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Id_role" Type="int" />
+          <Property Name="Salary" Type="float" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Vozrast">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Zhanr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Arenda_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Arenda_Sotrudnik">
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="id_sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Arenda">
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arenda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="id_arenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Film">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_Vozrast">
+          <End Role="Vozrast" Type="Self.Vozrast" Multiplicity="0..1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozrast">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="id_vozr_ogranich" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_Zhanr_Film">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_Zhanr" Type="Self.Film_Zhanr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Film_Zhanr">
+              <PropertyRef Name="Id_Film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_Zhanr_Zhanr">
+          <End Role="Zhanr" Type="Self.Zhanr" Multiplicity="0..1" />
+          <End Role="Film_Zhanr" Type="Self.Film_Zhanr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zhanr">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Film_Zhanr">
+              <PropertyRef Name="Id_Zhanr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudnik_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sotrudnik">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DVDModelContainer">
+          <EntitySet Name="Arenda" EntityType="Self.Arenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Check" EntityType="Self.Check" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film_Zhanr" EntityType="Self.Film_Zhanr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vozrast" EntityType="Self.Vozrast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zhanr" EntityType="Self.Zhanr" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Arenda_Client" Association="Self.FK_Arenda_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Arenda_Sotrudnik" Association="Self.FK_Arenda_Sotrudnik">
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Arenda" Association="Self.FK_Check_Arenda">
+            <End Role="Arenda" EntitySet="Arenda" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Film" Association="Self.FK_Check_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_Vozrast" Association="Self.FK_Film_Vozrast">
+            <End Role="Vozrast" EntitySet="Vozrast" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_Zhanr_Film" Association="Self.FK_Film_Zhanr_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Film_Zhanr" EntitySet="Film_Zhanr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_Zhanr_Zhanr" Association="Self.FK_Film_Zhanr_Zhanr">
+            <End Role="Zhanr" EntitySet="Zhanr" />
+            <End Role="Film_Zhanr" EntitySet="Film_Zhanr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudnik_Role" Association="Self.FK_Sotrudnik_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DVDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arenda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="D_vidachi" Type="DateTime" Precision="0" />
+          <Property Name="id_client" Type="Int32" />
+          <Property Name="id_sotrudnika" Type="Int32" />
+          <Property Name="D_sdachi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Arenda_Client" FromRole="Arenda" ToRole="Client" />
+          <NavigationProperty Name="Sotrudnik" Relationship="Self.FK_Arenda_Sotrudnik" FromRole="Arenda" ToRole="Sotrudnik" />
+          <NavigationProperty Name="Check" Relationship="Self.FK_Check_Arenda" FromRole="Arenda" ToRole="Check" />
+        </EntityType>
+        <EntityType Name="Check">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_arenda" Type="Int32" />
+          <Property Name="id_film" Type="Int32" />
+          <NavigationProperty Name="Arenda" Relationship="Self.FK_Check_Arenda" FromRole="Check" ToRole="Arenda" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_Check_Film" FromRole="Check" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_Client" FromRole="Client" ToRole="Arenda" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_vozr_ogranich" Type="Int32" />
+          <Property Name="cost_arend" Type="Double" />
+          <NavigationProperty Name="Check" Relationship="Self.FK_Check_Film" FromRole="Film" ToRole="Check" />
+          <NavigationProperty Name="Vozrast" Relationship="Self.FK_Film_Vozrast" FromRole="Film" ToRole="Vozrast" />
+          <NavigationProperty Name="Film_Zhanr" Relationship="Self.FK_Film_Zhanr_Film" FromRole="Film" ToRole="Film_Zhanr" />
+        </EntityType>
+        <EntityType Name="Film_Zhanr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Film" Type="Int32" />
+          <Property Name="Id_Zhanr" Type="Int32" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_Film_Zhanr_Film" FromRole="Film_Zhanr" ToRole="Film" />
+          <NavigationProperty Name="Zhanr" Relationship="Self.FK_Film_Zhanr_Zhanr" FromRole="Film_Zhanr" ToRole="Zhanr" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sotrudnik" Relationship="Self.FK_Sotrudnik_Role" FromRole="Role" ToRole="Sotrudnik" />
+        </EntityType>
+        <EntityType Name="Sotrudnik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id_role" Type="Int32" />
+          <Property Name="Salary" Type="Double" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_Sotrudnik" FromRole="Sotrudnik" ToRole="Arenda" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Sotrudnik_Role" FromRole="Sotrudnik" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vozrast">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_Film_Vozrast" FromRole="Vozrast" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Zhanr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Film_Zhanr" Relationship="Self.FK_Film_Zhanr_Zhanr" FromRole="Zhanr" ToRole="Film_Zhanr" />
+        </EntityType>
+        <Association Name="FK_Arenda_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Arenda_Sotrudnik">
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="id_sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Arenda">
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arenda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="id_arenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Film">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_Vozrast">
+          <End Role="Vozrast" Type="Self.Vozrast" Multiplicity="0..1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozrast">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="id_vozr_ogranich" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_Zhanr_Film">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_Zhanr" Type="Self.Film_Zhanr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Film_Zhanr">
+              <PropertyRef Name="Id_Film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_Zhanr_Zhanr">
+          <End Role="Zhanr" Type="Self.Zhanr" Multiplicity="0..1" />
+          <End Role="Film_Zhanr" Type="Self.Film_Zhanr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zhanr">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Film_Zhanr">
+              <PropertyRef Name="Id_Zhanr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudnik_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sotrudnik">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DVDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Arenda" EntityType="Self.Arenda" />
+          <EntitySet Name="Check" EntityType="Self.Check" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Film" EntityType="Self.Film" />
+          <EntitySet Name="Film_Zhanr" EntityType="Self.Film_Zhanr" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Vozrast" EntityType="Self.Vozrast" />
+          <EntitySet Name="Zhanr" EntityType="Self.Zhanr" />
+          <AssociationSet Name="FK_Arenda_Client" Association="Self.FK_Arenda_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Arenda_Sotrudnik" Association="Self.FK_Arenda_Sotrudnik">
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Arenda" Association="Self.FK_Check_Arenda">
+            <End Role="Arenda" EntitySet="Arenda" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Film" Association="Self.FK_Check_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_Vozrast" Association="Self.FK_Film_Vozrast">
+            <End Role="Vozrast" EntitySet="Vozrast" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_Zhanr_Film" Association="Self.FK_Film_Zhanr_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Film_Zhanr" EntitySet="Film_Zhanr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_Zhanr_Zhanr" Association="Self.FK_Film_Zhanr_Zhanr">
+            <End Role="Zhanr" EntitySet="Zhanr" />
+            <End Role="Film_Zhanr" EntitySet="Film_Zhanr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudnik_Role" Association="Self.FK_Sotrudnik_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DVDModelContainer" CdmEntityContainer="DVDEntities">
+          <EntitySetMapping Name="Arenda">
+            <EntityTypeMapping TypeName="DVDModel.Arenda">
+              <MappingFragment StoreEntitySet="Arenda">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="D_vidachi" ColumnName="D_vidachi" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_sotrudnika" ColumnName="id_sotrudnika" />
+                <ScalarProperty Name="D_sdachi" ColumnName="D_sdachi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Check">
+            <EntityTypeMapping TypeName="DVDModel.Check">
+              <MappingFragment StoreEntitySet="Check">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="id_arenda" ColumnName="id_arenda" />
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="DVDModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Film">
+            <EntityTypeMapping TypeName="DVDModel.Film">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_vozr_ogranich" ColumnName="id_vozr_ogranich" />
+                <ScalarProperty Name="cost_arend" ColumnName="cost_arend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Film_Zhanr">
+            <EntityTypeMapping TypeName="DVDModel.Film_Zhanr">
+              <MappingFragment StoreEntitySet="Film_Zhanr">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Film" ColumnName="Id_Film" />
+                <ScalarProperty Name="Id_Zhanr" ColumnName="Id_Zhanr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="DVDModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudnik">
+            <EntityTypeMapping TypeName="DVDModel.Sotrudnik">
+              <MappingFragment StoreEntitySet="Sotrudnik">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DVDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vozrast">
+            <EntityTypeMapping TypeName="DVDModel.Vozrast">
+              <MappingFragment StoreEntitySet="Vozrast">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zhanr">
+            <EntityTypeMapping TypeName="DVDModel.Zhanr">
+              <MappingFragment StoreEntitySet="Zhanr">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
