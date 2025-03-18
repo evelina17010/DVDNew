@@ -24,7 +24,7 @@ namespace DVD.Function
         public static Film GetFilmInfo(int id)
         {
             Film selectedFilm=Connection.Connection.dvd.Film.Where(filmID=>filmID.Id==id).FirstOrDefault();
-            Film film=new Film()
+            Film film=new Film() 
             {
                 Id = selectedFilm.Id,
                 Name= selectedFilm.Name,
