@@ -35,7 +35,7 @@ namespace DVD.Pages
             sotrudnik = Authorisation.AuthorisationSotr(login, password);
             if (sotrudnik != null)
             {
-                NavigationService.Navigate(new MainPage());
+                NavigationService.Navigate(new CapchaPage());
 
             }
             else MessageBox.Show("Логин или пароль неверный","error", MessageBoxButton.OK, MessageBoxImage.Error);

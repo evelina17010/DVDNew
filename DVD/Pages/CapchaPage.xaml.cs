@@ -66,7 +66,7 @@ namespace DVD.Pages
 
         private void CheckCapch_Click(object sender, RoutedEventArgs e)
         {
-            if (capcha == tbCapch.Text.Trim().ToUpper()) { MessageBox.Show("Молодис"); } else { MessageBox.Show("Плохо,лох"); }
+            if (capcha == tbCapch.Text.Trim().ToUpper()) { NavigationService.Navigate(new FilmListPage()); } else { MessageBox.Show("Плохо,лох"); }
         }
     }
 }

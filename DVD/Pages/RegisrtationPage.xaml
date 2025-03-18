@@ -31,6 +31,6 @@
         <TextBox x:Name="Tntxb" FontSize="40" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,10,10,10" Grid.Row="2"  TextAlignment="Center" Height="50"  />
         <TextBox x:Name="Reglogintxb" FontSize="40" Grid.Column="2" Grid.ColumnSpan="2" Margin="10,10,10,10" Grid.Row="3"  TextAlignment="Center" Height="50"  />
         <Button x:Name="RegesrtRegbtn" Content="Зарегистрироваться" FontFamily="Impact" FontSize="20" Grid.Column="2" Grid.ColumnSpan="2"  Margin="10,10,10,10" Grid.Row="4"  Height="50" Width="200" Click="RegesrtRegbtn_Click" Background="LightGray"  />
-
+        <Button x:Name="btnVhod" Content="Назад" Click="btnVhod_Click"  FontFamily="Impact" FontSize="20" Grid.Column="0" Grid.ColumnSpan="2"  Margin="10,10,10,10" Grid.Row="4"  Height="50" Width="200"  Background="LightGray" />
     </Grid>
 </Page>

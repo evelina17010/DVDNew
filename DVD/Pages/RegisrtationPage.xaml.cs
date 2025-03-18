@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DVD.Function;
 
 namespace DVD.Pages
 {
@@ -26,6 +27,19 @@ namespace DVD.Pages
         }
 
         private void RegesrtRegbtn_Click(object sender, RoutedEventArgs e)
+        {
+           string fio= Fiotxb.Text.Trim();
+            string phone= Tntxb.Text.Trim();
+            string pass= Reglogintxb.Text.Trim();
+            if(Fiotxb!=null && Reglogintxb!=null)
+            {
+Registration.RegistrationSotr(fio, phone, pass);
+                System.Windows.MessageBox.Show("Регистрация прошла успешна");
+                NavigationService.Navigate(new AutorizationPage());
+            }
+        }
+
+        private void btnVhod_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AutorizationPage());
         }

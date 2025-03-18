@@ -8,6 +8,6 @@ namespace DVD.Connection
 {
     internal class Connection
     {
-        public static DVDEntities dvd=new DVDEntities();
+        public static DVDEntities1 dvd=new DVDEntities1();
     }
 }

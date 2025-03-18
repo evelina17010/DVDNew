@@ -13,10 +13,10 @@ namespace DVD.Connection
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DVDEntities : DbContext
+    public partial class DVDEntities1 : DbContext
     {
-        public DVDEntities()
-            : base("name=DVDEntities")
+        public DVDEntities1()
+            : base("name=DVDEntities1")
         {
         }
     
@@ -32,7 +32,6 @@ namespace DVD.Connection
         public virtual DbSet<Film_Zhanr> Film_Zhanr { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Sotrudnik> Sotrudnik { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Vozrast> Vozrast { get; set; }
         public virtual DbSet<Zhanr> Zhanr { get; set; }
     }
