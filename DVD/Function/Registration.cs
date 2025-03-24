@@ -17,12 +17,14 @@ namespace DVD.Function
             Sotrudnik newSotr=new Sotrudnik();
 
 
+
             newSotr.FIO = fio.Trim();
             newSotr.Phone= phone.Trim();
             newSotr.Password= password.Trim();
             newSotr.Id_role = 1;
             DBconn.dvd.Sotrudnik.Add(newSotr);
            DBconn.dvd.SaveChanges();
+
 
         }
     }
