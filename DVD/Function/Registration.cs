@@ -22,6 +22,7 @@ namespace DVD.Function
             newSotr.Id_role = 1;
             DBconn.dvd.Sotrudnik.Add(newSotr);
            DBconn.dvd.SaveChanges();
+
         }
     }
 }
