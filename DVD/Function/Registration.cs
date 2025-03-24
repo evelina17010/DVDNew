@@ -20,8 +20,8 @@ namespace DVD.Function
             newSotr.Phone= phone.Trim();
             newSotr.Password= password.Trim();
             newSotr.Id_role = 1;
-            Connection.Connection.dvd.Sotrudnik.Add(newSotr);
-            Connection.Connection.SaveChanges();
+            DBconn.dvd.Sotrudnik.Add(newSotr);
+           DBconn.dvd.SaveChanges();
         }
     }
 }

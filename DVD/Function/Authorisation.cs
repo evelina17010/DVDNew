@@ -14,7 +14,7 @@ namespace DVD.Function
         public static ObservableCollection<Sotrudnik> sotrudniks { get; set; }
         public static Sotrudnik AuthorisationSotr (int login, string password)
         {
-            sotrudniks=new ObservableCollection<Sotrudnik> (Connection.Connection.dvd.Sotrudnik.ToList());
+            sotrudniks=new ObservableCollection<Sotrudnik> (DBconn.dvd.Sotrudnik.ToList());
             var userExists = sotrudniks.Where(sotrudniks => sotrudniks.Id == login && sotrudniks.Password == password).FirstOrDefault();
             if (userExists != null)
             {

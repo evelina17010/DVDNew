@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DVD.Connection
 {
-    internal class Connection
+    public class DBconn
     {
-        public static DVDEntities1 dvd=new DVDEntities1();
+        public static DVDEntities1 dvd = new DVDEntities1();
     }
 }

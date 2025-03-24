@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using DVD.Function;
+using DVD.Connection;
+
 
 namespace DVD.Pages
 {
@@ -26,7 +28,7 @@ namespace DVD.Pages
         public FilmListPage()
         {
             InitializeComponent();
-            filmlist=Film.GetFilms();
+            filmlist= FilmFunction.GetFilms();
             this.DataContext = this;
         }
 
@@ -36,10 +38,10 @@ namespace DVD.Pages
         }
         private void SearchTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            filmlist = Film.GetFilms();
+            filmlist = FilmFunction.GetFilms();
             if (SearchTextBox.Text != null)
             {
-                filmlist=Film.SearchFilm(SearchTextBox.Text.Trim());
+                filmlist= FilmFunction.SearchFilm(SearchTextBox.Text.Trim());
             }
             if (filmlist.Count == 0)
             {
@@ -49,5 +51,9 @@ namespace DVD.Pages
             MoviesListView.ItemsSource= filmlist;
         }
 
+        private void MoviesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

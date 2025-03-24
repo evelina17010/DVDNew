@@ -31,7 +31,7 @@
             </ComboBox>
             <Button Content="Поиск" Width="80" Click="SearchButton_Click"/>
         </StackPanel>
-        <ListView Grid.Row="1" Margin="10" x:Name="MoviesListView">
+        <ListView Grid.Row="1" Margin="10" x:Name="MoviesListView" SelectionChanged="MoviesListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Title}" Width="200"/>
