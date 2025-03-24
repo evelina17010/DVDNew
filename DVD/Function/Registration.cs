@@ -16,6 +16,7 @@ namespace DVD.Function
         {
             Sotrudnik newSotr=new Sotrudnik();
 
+
             newSotr.FIO = fio.Trim();
             newSotr.Phone= phone.Trim();
             newSotr.Password= password.Trim();
